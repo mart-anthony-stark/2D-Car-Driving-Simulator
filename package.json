@@ -4,7 +4,7 @@
   "description": "",
   "main": "main.js",
   "scripts": {
-    "dev": "tsc src/main --outFile build/bundle.js --watch --sourceMap --module amd"
+    "start": "tsc -t es2015 src/main --outFile build/bundle.js --watch --sourceMap"
   },
   "repository": {
     "type": "git",
