@@ -1,0 +1,9 @@
+body {
+  margin: 0;
+  background: rgb(44, 44, 44);
+  overflow: hidden;
+  text-align: center;
+}
+canvas#road {
+  background: rgb(134, 134, 134);
+}
