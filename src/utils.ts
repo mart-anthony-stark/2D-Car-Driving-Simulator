@@ -63,7 +63,7 @@ export class Car {
   angle: number;
   controls: Controls;
 
-  constructor(x, y, width, height) {
+  constructor(x: number, y: number, width: number, height: number) {
     this.x = x;
     this.y = y;
     this.width = width;
@@ -128,7 +128,7 @@ export class Car {
    *
    * @param {*} ctx Canvas context
    */
-  draw(ctx) {
+  draw(ctx: any) {
     ctx.save();
     ctx.translate(this.x, this.y);
     ctx.rotate(-this.angle);
