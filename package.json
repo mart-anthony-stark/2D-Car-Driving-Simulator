@@ -1,0 +1,26 @@
+{
+  "name": "self-driving-car",
+  "version": "1.0.0",
+  "description": "",
+  "main": "main.js",
+  "scripts": {
+    "dev": "tsc src/main --outFile build/bundle.js --watch --sourceMap --module amd"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mart-anthony-stark/2D-Car-Driving-Simulator.git"
+  },
+  "keywords": [
+    "Neural",
+    "Networks"
+  ],
+  "author": "Mart Anthony Salazar",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mart-anthony-stark/2D-Car-Driving-Simulator/issues"
+  },
+  "homepage": "https://github.com/mart-anthony-stark/2D-Car-Driving-Simulator#readme",
+  "devDependencies": {
+    "typescript": "^4.7.4"
+  }
+}
