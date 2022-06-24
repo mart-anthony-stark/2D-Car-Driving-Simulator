@@ -1,6 +1,6 @@
 import { Car } from "./utils";
 
-const road = document.querySelector("canvas");
+const road = <HTMLCanvasElement>document.querySelector("canvas");
 road.height = window.innerHeight;
 road.width = 500;
 
