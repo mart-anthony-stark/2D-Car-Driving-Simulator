@@ -1,64 +1,53 @@
-var __classPrivateFieldGet = (this && this.__classPrivateFieldGet) || function (receiver, state, kind, f) {
-    if (kind === "a" && !f) throw new TypeError("Private accessor was defined without a getter");
-    if (typeof state === "function" ? receiver !== state || !f : !state.has(receiver)) throw new TypeError("Cannot read private member from an object whose class did not declare it");
-    return kind === "m" ? f : kind === "a" ? f.call(receiver) : f ? f.value : state.get(receiver);
-};
-define("utils", ["require", "exports"], function (require, exports) {
-    "use strict";
-    var _Controls_instances, _Controls_addKeyboardListeners;
-    exports.__esModule = true;
-    exports.Car = exports.Controls = void 0;
-    var Controls = /** @class */ (function () {
-        function Controls() {
-            _Controls_instances.add(this);
+var util;
+(function (util) {
+    class Controls {
+        constructor() {
             this.forward = false;
             this.left = false;
             this.right = false;
             this.reverse = false;
-            __classPrivateFieldGet(this, _Controls_instances, "m", _Controls_addKeyboardListeners).call(this);
+            this.addKeyboardListeners();
         }
-        return Controls;
-    }());
-    exports.Controls = Controls;
-    _Controls_instances = new WeakSet(), _Controls_addKeyboardListeners = function _Controls_addKeyboardListeners() {
-        var _this = this;
-        document.onkeydown = function (event) {
-            switch (event.key) {
-                case "ArrowLeft":
-                    _this.left = true;
-                    break;
-                case "ArrowRight":
-                    _this.right = true;
-                    break;
-                case "ArrowUp":
-                    _this.forward = true;
-                    break;
-                case "ArrowDown":
-                    _this.reverse = true;
-                    break;
-            }
-            // console.table(this);
-        };
-        document.onkeyup = function (event) {
-            switch (event.key) {
-                case "ArrowLeft":
-                    _this.left = false;
-                    break;
-                case "ArrowRight":
-                    _this.right = false;
-                    break;
-                case "ArrowUp":
-                    _this.forward = false;
-                    break;
-                case "ArrowDown":
-                    _this.reverse = false;
-                    break;
-            }
-            // console.table(this);
-        };
-    };
-    var Car = /** @class */ (function () {
-        function Car(x, y, width, height) {
+        addKeyboardListeners() {
+            document.onkeydown = (event) => {
+                switch (event.key) {
+                    case "ArrowLeft":
+                        this.left = true;
+                        break;
+                    case "ArrowRight":
+                        this.right = true;
+                        break;
+                    case "ArrowUp":
+                        this.forward = true;
+                        break;
+                    case "ArrowDown":
+                        this.reverse = true;
+                        break;
+                }
+                // console.table(this);
+            };
+            document.onkeyup = (event) => {
+                switch (event.key) {
+                    case "ArrowLeft":
+                        this.left = false;
+                        break;
+                    case "ArrowRight":
+                        this.right = false;
+                        break;
+                    case "ArrowUp":
+                        this.forward = false;
+                        break;
+                    case "ArrowDown":
+                        this.reverse = false;
+                        break;
+                }
+                // console.table(this);
+            };
+        }
+    }
+    util.Controls = Controls;
+    class Car {
+        constructor(x, y, width, height) {
             this.x = x;
             this.y = y;
             this.width = width;
@@ -70,7 +59,7 @@ define("utils", ["require", "exports"], function (require, exports) {
             this.angle = 0;
             this.controls = new Controls();
         }
-        Car.prototype.update = function () {
+        update() {
             // Up control
             if (this.controls.forward) {
                 this.speed += this.acceleration;
@@ -95,7 +84,7 @@ define("utils", ["require", "exports"], function (require, exports) {
                 this.speed = 0;
             }
             if (this.speed != 0) {
-                var flip = this.speed > 0 ? 1 : -1;
+                const flip = this.speed > 0 ? 1 : -1;
                 if (this.controls.left) {
                     // Left control
                     this.angle += 0.03 * flip;
@@ -107,12 +96,12 @@ define("utils", ["require", "exports"], function (require, exports) {
             }
             this.x -= Math.sin(this.angle) * this.speed;
             this.y -= Math.cos(this.angle) * this.speed;
-        };
+        }
         /**
          *
          * @param {*} ctx Canvas context
          */
-        Car.prototype.draw = function (ctx) {
+        draw(ctx) {
             ctx.save();
             ctx.translate(this.x, this.y);
             ctx.rotate(-this.angle);
@@ -121,27 +110,24 @@ define("utils", ["require", "exports"], function (require, exports) {
             ctx.fillStyle = "#053869";
             ctx.fill();
             ctx.restore();
-        };
-        return Car;
-    }());
-    exports.Car = Car;
-});
-define("main", ["require", "exports", "utils"], function (require, exports, utils_1) {
-    "use strict";
-    exports.__esModule = true;
-    var road = document.querySelector("canvas");
-    road.height = window.innerHeight;
-    road.width = 500;
-    var context = road.getContext("2d");
-    var car = new utils_1.Car(window.innerWidth / 2, window.innerHeight - 80, 40, 80);
-    car.draw(context);
-    animate();
-    function animate() {
-        car.update();
-        road.height = window.innerHeight;
-        road.width = window.innerWidth;
-        car.draw(context);
-        requestAnimationFrame(animate);
+        }
     }
-});
+    util.Car = Car;
+})(util || (util = {}));
+// import { Car } from "./utils";
+/// <reference path="./utils.ts" />
+const road = document.querySelector("canvas");
+road.height = window.innerHeight;
+road.width = 500;
+const context = road.getContext("2d");
+const car = new util.Car(window.innerWidth / 2, window.innerHeight - 80, 40, 80);
+car.draw(context);
+animate();
+function animate() {
+    car.update();
+    road.height = window.innerHeight;
+    road.width = window.innerWidth;
+    car.draw(context);
+    requestAnimationFrame(animate);
+}
 //# sourceMappingURL=bundle.js.map
