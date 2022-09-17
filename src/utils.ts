@@ -72,7 +72,7 @@ namespace util {
 
       this.speed = 0;
       this.acceleration = 0.5; //0.2
-      this.maxSpeed = 5; //3
+      this.maxSpeed = 15; //3
       this.friction = 0.05;
       this.angle = 0;
 
@@ -129,21 +129,90 @@ namespace util {
      *
      * @param {*} ctx Canvas context
      */
-    draw(ctx: any) {
+    draw(ctx: any, isLightsOn: boolean) {
       ctx.save();
       ctx.translate(this.x, this.y);
       ctx.rotate(-this.angle);
 
+      // Body
       ctx.beginPath();
       ctx.roundRect(
         -this.width / 2,
         -this.height / 2,
         this.width,
         this.height,
-        5
+        15
       );
-      ctx.fillStyle = "#053869";
+      ctx.fillStyle = "#333333";
       ctx.fill();
+      ctx.closePath();
+
+      // bumper
+      ctx.beginPath();
+      ctx.roundRect(
+        -this.width / 2 + 3,
+        -this.height / 2 - 10,
+        this.width - 6,
+        10,
+        25
+      );
+      ctx.fillStyle = "#000000";
+      ctx.fill();
+      ctx.closePath();
+
+      // Left light
+      ctx.beginPath();
+      ctx.roundRect(-this.width / 2, -this.height / 2 - 2, 15, 10, 5);
+      ctx.fillStyle = isLightsOn ? "#FBBC05" : "#ffffff";
+      ctx.fill();
+      ctx.closePath();
+
+      // Right light
+      ctx.beginPath();
+      ctx.roundRect(this.width / 2 - 15, -this.height / 2 - 2, 15, 10, 5);
+      ctx.fillStyle = isLightsOn ? "#FBBC05" : "#ffffff";
+      ctx.fill();
+      ctx.closePath();
+
+      if (isLightsOn) {
+        // Right lightbeam
+        ctx.beginPath();
+        ctx.roundRect(this.width / 2 - 20, -this.height / 2 - 85, 25, 85, 5);
+        ctx.fillStyle = "#fbbd0549";
+        ctx.fill();
+        ctx.closePath();
+
+        // Left lightbeam
+        ctx.beginPath();
+        ctx.roundRect(-this.width / 2 - 5, -this.height / 2 - 85, 25, 85, 5);
+        ctx.fillStyle = "#fbbd0549";
+        ctx.fill();
+        ctx.closePath();
+      }
+
+      // Left front tire
+      ctx.beginPath();
+      ctx.roundRect(-this.width / 2 - 10, -this.height / 2, 10, 35, 5);
+      ctx.fillStyle = "#000000";
+      ctx.fill();
+      // Right front tire
+      ctx.beginPath();
+      ctx.roundRect(this.width / 2, -this.height / 2, 10, 35, 5);
+      ctx.fillStyle = "#000000";
+      ctx.fill();
+      ctx.closePath();
+
+      // Left rear tire
+      ctx.beginPath();
+      ctx.roundRect(-this.width / 2 - 10, this.height / 2 - 45, 10, 35, 5);
+      ctx.fillStyle = "#000000";
+      ctx.fill();
+      // Right rear tire
+      ctx.beginPath();
+      ctx.roundRect(this.width / 2, this.height / 2 - 45, 10, 35, 5);
+      ctx.fillStyle = "#000000";
+      ctx.fill();
+      ctx.closePath();
 
       ctx.restore();
     }

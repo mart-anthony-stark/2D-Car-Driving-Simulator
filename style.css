@@ -3,7 +3,63 @@ body {
   background: rgb(44, 44, 44);
   overflow: hidden;
   text-align: center;
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+    "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
 }
 canvas#road {
   background: rgb(43, 43, 43);
+}
+.info {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: rgba(255, 255, 255, 0.4);
+  backdrop-filter: blur(25px);
+  color: aliceblue;
+  padding: 2rem;
+  border-radius: 25px;
+  display: flex;
+  max-width: 500px;
+  width: 100%;
+  gap: 10px;
+  align-items: center;
+  justify-content: center;
+  transition: 0.5s ease;
+}
+.key {
+  position: relative;
+  background: rgb(44, 44, 44);
+  width: 50px;
+  height: 50px;
+  border-radius: 5px;
+  color: #000;
+}
+.key::after {
+  content: "F";
+  position: absolute;
+  height: 50px;
+  width: 50px;
+  border-radius: 5px;
+  background: aliceblue;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1;
+  top: -5px;
+  right: -5px;
+  animation: presskey 0.8s ease-in-out infinite;
+}
+.hide-info {
+  scale: 0;
+}
+@keyframes presskey {
+  0% {
+    top: -5px;
+    right: -5px;
+  }
+  100% {
+    top: 0px;
+    right: 0px;
+  }
 }
