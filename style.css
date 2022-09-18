@@ -1,6 +1,8 @@
 body {
   margin: 0;
-  background: rgb(44, 44, 44);
+  /* background: rgb(44, 44, 44); */
+  background: url("./src/images/grass.jpg");
+  background-size: cover;
   overflow: hidden;
   text-align: center;
   font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
@@ -8,6 +10,8 @@ body {
 }
 canvas#road {
   background: rgb(43, 43, 43);
+  background: url("./src/images/grass.jpg");
+  background-size: cover;
 }
 .info {
   position: fixed;
